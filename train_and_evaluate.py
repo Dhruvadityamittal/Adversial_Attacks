@@ -2,10 +2,14 @@ import torch
 import model 
 from checkpoints import * 
 import torch.nn.functional as F
+import time
 
 def train_model(epochs, model,opt,train_mnist,device):
+    init_time = time.time()
     for i in range(epochs):
         l = 0
+        
+        start = time.time()
         checkpoint = {'state_dict': model.state_dict() , 'opt': opt.state_dict()}
         save_checkpoint(checkpoint)
         for images,targets in train_mnist:
@@ -15,8 +19,10 @@ def train_model(epochs, model,opt,train_mnist,device):
             loss = F.nll_loss(outs,targets)
             loss.backward()
             opt.step()
-        print("Epoch {}, Loss : {}".format(i,loss.item()))
-
+        end = time.time()
+        print("Epoch {}, Loss : {} , Time = {}".format(i,loss.item(), end-start))
+    final_time = time.time()
+    print("Total Time =", final_time - init_time)
 
 def evaluate_model(model,test_mnist,device):
     model.eval()

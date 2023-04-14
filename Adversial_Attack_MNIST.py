@@ -10,6 +10,7 @@ from Attack import *
 from dataloader import * 
 from plot_graphs import * 
 
+
 use_cuda = True
 device = torch.device("cuda" if (use_cuda and torch.cuda.is_available()) else "cpu")
 
@@ -24,7 +25,7 @@ load_check = True
 epochs = 10 
 
 if(load_check):
-    load_checkpoint(model,opt,torch.load(r'C:\Users\Dhruv\OneDrive\Desktop\My_projects\Adversial_Attacks\mnist.pth.tar') )
+    load_checkpoint(model,opt,torch.load(r'mnist.pth.tar') )
 else:    
     train_model(epochs,model,opt,train_mnist,device)
 
