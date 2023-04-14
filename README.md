@@ -1,2 +1,3 @@
 # Adversial_Attacks
-Adversial Attacks using Pytorch 
+In this project we used Fast Gradient Sign Attack (FGSM), to fool an MNIST classifier.
+
